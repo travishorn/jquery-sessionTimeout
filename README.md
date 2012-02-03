@@ -12,28 +12,28 @@ The example uses classic ASP. Open default.asp to view.
 4. Call `$.sessionTimeout();` after document ready
 
 ## Options
-**message**
-Text shown to user in dialog after warning period.
+**message**  
+Text shown to user in dialog after warning period.  
 Default: 'Your session is about to expire.'
 
-**keepAliveUrl**
-URL to call through AJAX to keep session alive
+**keepAliveUrl**  
+URL to call through AJAX to keep session alive  
 Default: 'keepAlive.asp'
 
-**redirUrl**
-URL to take browser to if no action is take after warning period
+**redirUrl**  
+URL to take browser to if no action is take after warning period  
 Default: 'timedOut.asp'
 
-**logoutUrl**
-URL to take browser to if user clicks "Log Out Now"
+**logoutUrl**  
+URL to take browser to if user clicks "Log Out Now"  
 Default: 'logout.asp'
 
-**warnAfter**
-Time in milliseconds after page is opened until warning dialog is opened
+**warnAfter**  
+Time in milliseconds after page is opened until warning dialog is opened  
 Default: 900000 (15 minutes)
 
-**redirAfter**
-Time in milliseconds after page is opened until browser is redirected to redirUrl
+**redirAfter**  
+Time in milliseconds after page is opened until browser is redirected to redirUrl  
 Default: 1200000 (20 minutes)
 
 ## Links
