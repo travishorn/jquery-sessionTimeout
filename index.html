@@ -1,0 +1,81 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>jQuery-sessionTimeout by travishorn</title>
+    
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>jQuery-sessionTimeout</h1>
+        <p>After a set amount of time, a dialog is shown to the user with the option to either log out now, or stay connected. If log out now is selected, the page is redirected to a logout URL. If stay connected is selected, a keep-alive URL is requested through AJAX. If no options is selected after another set amount of time, the page is automatically redirected to a timeout URL.</p>
+        <p class="view"><a href="https://github.com/travishorn/jquery-sessionTimeout">View the Project on GitHub <small>travishorn/jquery-sessionTimeout</small></a></p>
+        <ul>
+          <li><a href="https://github.com/travishorn/jquery-sessionTimeout/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/travishorn/jquery-sessionTimeout/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/travishorn/jquery-sessionTimeout">Fork On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h2>Description</h2>
+
+<p>After a set amount of time, a dialog is shown to the user with the option to either log out now, or stay connected. If log out now is selected, the page is redirected to a logout URL. If stay connected is selected, a keep-alive URL is requested through AJAX. If no options is selected after another set amount of time, the page is automatically redirected to a timeout URL.</p>
+
+<p>The example uses classic ASP. Open default.asp to view.</p>
+
+<h2>Usage</h2>
+
+<ol>
+<li>Include jQuery</li>
+<li>Include jQuery UI (for dialog)</li>
+<li>Include jquery.sessionTimeout.js</li>
+<li>Call <code>$.sessionTimeout();</code> after document ready</li>
+</ol><h2>Options</h2>
+
+<p><strong>message</strong><br>
+Text shown to user in dialog after warning period.<br>
+Default: 'Your session is about to expire.'</p>
+
+<p><strong>keepAliveUrl</strong><br>
+URL to call through AJAX to keep session alive<br>
+Default: 'keepAlive.asp'</p>
+
+<p><strong>redirUrl</strong><br>
+URL to take browser to if no action is take after warning period<br>
+Default: 'timedOut.asp'</p>
+
+<p><strong>logoutUrl</strong><br>
+URL to take browser to if user clicks "Log Out Now"<br>
+Default: 'logout.asp'</p>
+
+<p><strong>warnAfter</strong><br>
+Time in milliseconds after page is opened until warning dialog is opened<br>
+Default: 900000 (15 minutes)</p>
+
+<p><strong>redirAfter</strong><br>
+Time in milliseconds after page is opened until browser is redirected to redirUrl<br>
+Default: 1200000 (20 minutes)</p>
+
+<h2>Links</h2>
+
+<ul>
+<li><a href="http://jsfiddle.net/xHEF9/4/">Online Demo</a></li>
+<li><a href="https://sites.google.com/site/tpopsjqueryplugins/sessiontimeout/screenshots">Screenshots</a></li>
+</ul>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/travishorn">travishorn</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+  </body>
+</html>
