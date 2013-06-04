@@ -44,6 +44,12 @@
 //     Default: 1200000 (20 minutes)
 //
 (function( $ ){
+  $("document").ajaxStop(function(){
+    // Stop redirect timer and restart warning timer
+    controlRedirTimer('stop');
+    controlDialogTimer('start');
+  })
+
 	jQuery.sessionTimeout = function( options ) {
 		var defaults = {
 			message      : 'Your session is about to expire.',
@@ -53,11 +59,11 @@
 			warnAfter    : 900000, // 15 minutes
 			redirAfter   : 1200000 // 20 minutes
 		}
-		
+
 		// Extend user-set options over defaults
 		var o = defaults
 		if ( options ) { var o = $.extend( defaults, options ); };
-		
+
 		// Create timeout warning dialog
 		$('body').append('<div title="Session Timeout" id="sessionTimeout-dialog">'+ o.message +'</div>');
 		$('#sessionTimeout-dialog').dialog({
@@ -74,19 +80,15 @@
 				// Button two - closes dialog and makes call to keep-alive URL
 				"Stay Connected": function() {
 					$(this).dialog('close');
-					
+
 					$.ajax({
 						type: 'POST',
 						url: o.keepAliveUrl
 					});
-					
-					// Stop redirect timer and restart warning timer
-					controlRedirTimer('stop');
-					controlDialogTimer('start');
 				}
 			}
 		});
-		
+
 		function controlDialogTimer(action){
 			switch(action) {
 				case 'start':
@@ -96,13 +98,13 @@
 						controlRedirTimer('start');
 					}, o.warnAfter);
 					break;
-				
+
 				case 'stop':
 					clearTimeout(dialogTimer);
 					break;
 			}
 		}
-		
+
 		function controlRedirTimer(action){
 			switch(action) {
 				case 'start':
@@ -111,13 +113,13 @@
 						window.location = o.redirUrl
 					}, o.redirAfter - o.warnAfter);
 					break;
-				
+
 				case 'stop':
 					clearTimeout(redirTimer);
 					break;
 			}
 		}
-		
+
 		// Begin warning period
 		controlDialogTimer('start');
 	};
