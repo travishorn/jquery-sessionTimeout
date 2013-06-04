@@ -44,7 +44,7 @@
 //     Default: 1200000 (20 minutes)
 //
 (function( $ ){
-  $("document").ajaxStop(function(){
+  $("document").ajaxSuccess(function(){
     // Stop redirect timer and restart warning timer
     controlRedirTimer('stop');
     controlDialogTimer('start');
