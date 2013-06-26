@@ -6,7 +6,7 @@
     "alert",
     "ajax"
   ],
-  "version": "1.0.2",
+  "version": "1.0.3",
   "author": {
     "name": "Travis Horn",
     "url": "http://travishorn.com"
@@ -22,6 +22,7 @@
   "docs": "http://travishorn.github.com/jquery-sessionTimeout",
   "download": "https://github.com/travishorn/jquery-sessionTimeout/archive/master.zip",
   "dependencies": {
-    "jquery": ">=1.6.4"
+    "jquery": ">=1.6.4",
+    "jquery-ui": ">=1.10.3"
   }
 }
