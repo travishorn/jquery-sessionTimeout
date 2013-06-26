@@ -10,28 +10,28 @@ After a set amount of time, a dialog is shown to the user with the option to eit
 4. Call `$.sessionTimeout();` after document ready
 
 ## Options
-**message**
+**message**<br>
 Text shown to user in dialog after warning period.
 Default: 'Your session is about to expire.'
 
-**keepAliveUrl**
-URL to call through AJAX to keep session alive. This resource should do something innocuous that would keep the session alive, which will depend on your server-side platform.
+**keepAliveUrl**<br>
+URL to call through AJAX to keep session alive. This resource should do something innocuous that would keep the session alive, which will depend on your server-side platform.<br>
 Default: '/keep-alive'
 
-**redirUrl**
-URL to take browser to if no action is take after warning period.
+**redirUrl**<br>
+URL to take browser to if no action is take after warning period.<br>
 Default: '/timed-out'
 
-**logoutUrl**
-URL to take browser to if user clicks "Log Out Now".
+**logoutUrl**<br>
+URL to take browser to if user clicks "Log Out Now".<br>
 Default: '/log-out'
 
-**warnAfter**
-Time in milliseconds after page is opened until warning dialog is opened.
+**warnAfter**<br>
+Time in milliseconds after page is opened until warning dialog is opened.<br>
 Default: 900000 (15 minutes)
 
-**redirAfter**
-Time in milliseconds after page is opened until browser is redirected to redirUrl.
+**redirAfter**<br>
+Time in milliseconds after page is opened until browser is redirected to redirUrl.<br>
 Default: 1200000 (20 minutes)
 
 ## Links
