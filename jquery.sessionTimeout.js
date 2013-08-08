@@ -64,40 +64,25 @@
 		if ( options ) { o = $.extend( defaults, options ); }
 
 		// Create timeout warning dialog
-		$('body').append('<div title="Session Timeout" id="sessionTimeout-dialog">'+ o.message +'</div>');
-		$('#sessionTimeout-dialog').dialog({
-			autoOpen: false,
-			width: 400,
-			modal: true,
-			closeOnEscape: false,
-			open: function() { $(".ui-dialog-titlebar-close").hide(); },
-			buttons: {
-				// Button one - takes user to logout URL
-				"Log Out Now": function() {
-					window.location = o.logoutUrl;
-				},
-				// Button two - closes dialog and makes call to keep-alive URL
-				"Stay Connected": function() {
-					$(this).dialog('close');
+		$('body').append('<div class="modal fade" id="sessionTimeout-dialog"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title">Your Session is About to Expire!</h4></div><div class="modal-body">'+ o.message +'</div><div class="modal-footer"><button id="sessionTimeout-dialog-logout" type="button" class="btn btn-default">Logout</button><button id="sessionTimeout-dialog-keepalive" type="button" class="btn btn-primary" data-dismiss="modal">Stay Connected</button></div></div></div></div>');
+		$('#sessionTimeout-dialog-logout').on('click', function () { window.location = o.logoutUrl; });
+		$('#sessionTimeout-dialog').on('hide.bs.modal', function () {
+			$.ajax({
+				type: 'POST',
+				url: o.keepAliveUrl
+			});
 
-					$.ajax({
-						type: 'POST',
-						url: o.keepAliveUrl
-					});
-
-					// Stop redirect timer and restart warning timer
-					controlRedirTimer('stop');
-					controlDialogTimer('start');
-				}
-			}
-		});
+			// Stop redirect timer and restart warning timer
+			controlRedirTimer('stop');
+			controlDialogTimer('start');
+		})
 
 		function controlDialogTimer(action){
 			switch(action) {
 				case 'start':
 					// After warning period, show dialog and start redirect timer
 					dialogTimer = setTimeout(function(){
-						$('#sessionTimeout-dialog').dialog('open');
+						$('#sessionTimeout-dialog').modal('show');
 						controlRedirTimer('start');
 					}, o.warnAfter);
 					break;
