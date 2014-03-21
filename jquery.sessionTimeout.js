@@ -25,6 +25,12 @@
 //     Text shown to user in dialog after warning period.
 //     Default: 'Your session is about to expire.'
 //
+//   stayConnectedBtn
+//     Default: 'Stay connected'
+//
+//   logoutBtn
+//     Default: 'Logout'
+//
 //   keepAliveUrl
 //     URL to call through AJAX to keep session alive. This resource should do something innocuous that would keep the session alive, which will depend on your server-side platform.
 //     Default: '/keep-alive'
@@ -48,12 +54,14 @@
 (function( $ ){
 	jQuery.sessionTimeout = function( options ) {
 		var defaults = {
-			message      : 'Your session is about to expire.',
-			keepAliveUrl : '/keep-alive',
-			redirUrl     : '/timed-out',
-			logoutUrl    : '/log-out',
-			warnAfter    : 900000, // 15 minutes
-			redirAfter   : 1200000 // 20 minutes
+			message          : 'Your session is about to expire.',
+            stayConnectedBtn : 'Stay connected',
+            logoutBtn        : 'Logout',
+			keepAliveUrl     : '/keep-alive',
+			redirUrl         : '/timed-out',
+			logoutUrl        : '/log-out',
+			warnAfter        : 900000, // 15 minutes
+			redirAfter       : 1200000 // 20 minutes
 		};
 
 		// Extend user-set options over defaults
@@ -64,7 +72,7 @@
 		if ( options ) { o = $.extend( defaults, options ); }
 
 		// Create timeout warning dialog
-		$('body').append('<div class="modal fade" id="sessionTimeout-dialog"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title">Your Session is About to Expire!</h4></div><div class="modal-body">'+ o.message +'</div><div class="modal-footer"><button id="sessionTimeout-dialog-logout" type="button" class="btn btn-default">Logout</button><button id="sessionTimeout-dialog-keepalive" type="button" class="btn btn-primary" data-dismiss="modal">Stay Connected</button></div></div></div></div>');
+		$('body').append('<div class="modal fade" id="sessionTimeout-dialog"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title">Your Session is About to Expire!</h4></div><div class="modal-body">'+ o.message +'</div><div class="modal-footer"><button id="sessionTimeout-dialog-logout" type="button" class="btn btn-default">'+o.logoutBtn+'</button><button id="sessionTimeout-dialog-keepalive" type="button" class="btn btn-primary" data-dismiss="modal">'+o.stayConnectedBtn+'</button></div></div></div></div>');
 		$('#sessionTimeout-dialog-logout').on('click', function () { window.location = o.logoutUrl; });
 		$('#sessionTimeout-dialog').on('hide.bs.modal', function () {
 			$.ajax({
