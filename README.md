@@ -40,3 +40,11 @@ Default: 900000 (15 minutes)
 **redirAfter**<br>
 Time in milliseconds after page is opened until browser is redirected to redirUrl.<br>
 Default: 1200000 (20 minutes)
+
+**stayConnectedBtn**<br>
+Text to use for the 'Stay Connected' button.<br>
+Default: 'Stay Connected'
+
+**logoutBtn**<br>
+Text to use for the 'Logout' button<br>
+Default: 'Logout'
