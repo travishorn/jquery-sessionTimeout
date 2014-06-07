@@ -21,6 +21,10 @@
 //
 // OPTIONS
 //
+//   title
+//     Title for the dialog.
+//     Default: 'Your session is about to expire!'
+//
 //   message
 //     Text shown to user in dialog after warning period.
 //     Default: 'Your session is about to expire.'
@@ -54,6 +58,7 @@
 (function( $ ){
 	jQuery.sessionTimeout = function( options ) {
 		var defaults = {
+			title		 : 'Your session is about to expire!'
 			message          : 'Your session is about to expire.',
             stayConnectedBtn : 'Stay connected',
             logoutBtn        : 'Logout',
@@ -72,7 +77,7 @@
 		if ( options ) { o = $.extend( defaults, options ); }
 
 		// Create timeout warning dialog
-		$('body').append('<div class="modal fade" id="sessionTimeout-dialog"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title">Your Session is About to Expire!</h4></div><div class="modal-body">'+ o.message +'</div><div class="modal-footer"><button id="sessionTimeout-dialog-logout" type="button" class="btn btn-default">'+o.logoutBtn+'</button><button id="sessionTimeout-dialog-keepalive" type="button" class="btn btn-primary" data-dismiss="modal">'+o.stayConnectedBtn+'</button></div></div></div></div>');
+		$('body').append('<div class="modal fade" id="sessionTimeout-dialog"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title">'+o.title+'</h4></div><div class="modal-body">'+ o.message +'</div><div class="modal-footer"><button id="sessionTimeout-dialog-logout" type="button" class="btn btn-default">'+o.logoutBtn+'</button><button id="sessionTimeout-dialog-keepalive" type="button" class="btn btn-primary" data-dismiss="modal">'+o.stayConnectedBtn+'</button></div></div></div></div>');
 		$('#sessionTimeout-dialog-logout').on('click', function () { window.location = o.logoutUrl; });
 		$('#sessionTimeout-dialog').on('hide.bs.modal', function () {
 			$.ajax({
