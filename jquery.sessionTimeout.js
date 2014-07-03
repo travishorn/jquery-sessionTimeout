@@ -21,9 +21,19 @@
 //
 // OPTIONS
 //
+//   title
+//     Title for the dialog.
+//     Default: 'Your session is about to expire!'
+//
 //   message
 //     Text shown to user in dialog after warning period.
 //     Default: 'Your session is about to expire.'
+//
+//   stayConnectedBtn
+//     Default: 'Stay connected'
+//
+//   logoutBtn
+//     Default: 'Logout'
 //
 //   keepAliveUrl
 //     URL to call through AJAX to keep session alive. This resource should do something innocuous that would keep the session alive, which will depend on your server-side platform.
@@ -48,12 +58,15 @@
 (function( $ ){
 	jQuery.sessionTimeout = function( options ) {
 		var defaults = {
-			message      : 'Your session is about to expire.',
-			keepAliveUrl : '/keep-alive',
-			redirUrl     : '/timed-out',
-			logoutUrl    : '/log-out',
-			warnAfter    : 900000, // 15 minutes
-			redirAfter   : 1200000 // 20 minutes
+			title		 : 'Your session is about to expire!'
+			message          : 'Your session is about to expire.',
+            stayConnectedBtn : 'Stay connected',
+            logoutBtn        : 'Logout',
+			keepAliveUrl     : '/keep-alive',
+			redirUrl         : '/timed-out',
+			logoutUrl        : '/log-out',
+			warnAfter        : 900000, // 15 minutes
+			redirAfter       : 1200000 // 20 minutes
 		};
 
 		// Extend user-set options over defaults
@@ -64,40 +77,25 @@
 		if ( options ) { o = $.extend( defaults, options ); }
 
 		// Create timeout warning dialog
-		$('body').append('<div title="Session Timeout" id="sessionTimeout-dialog">'+ o.message +'</div>');
-		$('#sessionTimeout-dialog').dialog({
-			autoOpen: false,
-			width: 400,
-			modal: true,
-			closeOnEscape: false,
-			open: function() { $(".ui-dialog-titlebar-close").hide(); },
-			buttons: {
-				// Button one - takes user to logout URL
-				"Log Out Now": function() {
-					window.location = o.logoutUrl;
-				},
-				// Button two - closes dialog and makes call to keep-alive URL
-				"Stay Connected": function() {
-					$(this).dialog('close');
+		$('body').append('<div class="modal fade" id="sessionTimeout-dialog"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title">'+o.title+'</h4></div><div class="modal-body">'+ o.message +'</div><div class="modal-footer"><button id="sessionTimeout-dialog-logout" type="button" class="btn btn-default">'+o.logoutBtn+'</button><button id="sessionTimeout-dialog-keepalive" type="button" class="btn btn-primary" data-dismiss="modal">'+o.stayConnectedBtn+'</button></div></div></div></div>');
+		$('#sessionTimeout-dialog-logout').on('click', function () { window.location = o.logoutUrl; });
+		$('#sessionTimeout-dialog').on('hide.bs.modal', function () {
+			$.ajax({
+				type: 'POST',
+				url: o.keepAliveUrl
+			});
 
-					$.ajax({
-						type: 'POST',
-						url: o.keepAliveUrl
-					});
-
-					// Stop redirect timer and restart warning timer
-					controlRedirTimer('stop');
-					controlDialogTimer('start');
-				}
-			}
-		});
+			// Stop redirect timer and restart warning timer
+			controlRedirTimer('stop');
+			controlDialogTimer('start');
+		})
 
 		function controlDialogTimer(action){
 			switch(action) {
 				case 'start':
 					// After warning period, show dialog and start redirect timer
 					dialogTimer = setTimeout(function(){
-						$('#sessionTimeout-dialog').dialog('open');
+						$('#sessionTimeout-dialog').modal('show');
 						controlRedirTimer('start');
 					}, o.warnAfter);
 					break;
