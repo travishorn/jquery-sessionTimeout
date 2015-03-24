@@ -123,6 +123,14 @@
 			}
 		}
 
+        $( document ).ajaxComplete(function() {
+            if(!$('#sessionTimeout-dialog').dialog( "isOpen" )) {
+                controlRedirTimer('stop');
+                controlDialogTimer('stop');
+                controlDialogTimer('start');
+            }
+        });
+        
 		// Begin warning period
 		controlDialogTimer('start');
 	};
