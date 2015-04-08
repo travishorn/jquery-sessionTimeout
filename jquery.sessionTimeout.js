@@ -29,6 +29,10 @@
 //     URL to call through AJAX to keep session alive. This resource should do something innocuous that would keep the session alive, which will depend on your server-side platform.
 //     Default: '/keep-alive'
 //
+//   keepAliveAjaxRequestType
+//     How should we make the call to the keep-alive url? (GET/POST/PUT)
+//     Default: 'POST'
+//
 //   redirUrl
 //     URL to take browser to if no action is take after warning period
 //     Default: '/timed-out'
@@ -50,6 +54,7 @@
 		var defaults = {
 			message      : 'Your session is about to expire.',
 			keepAliveUrl : '/keep-alive',
+			keepAliveAjaxRequestType: 'POST',
 			redirUrl     : '/timed-out',
 			logoutUrl    : '/log-out',
 			warnAfter    : 900000, // 15 minutes
@@ -81,7 +86,7 @@
 					$(this).dialog('close');
 
 					$.ajax({
-						type: 'POST',
+						type: o.keepAliveAjaxRequestType,
 						url: o.keepAliveUrl
 					});
 
