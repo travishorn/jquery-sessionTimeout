@@ -29,25 +29,27 @@
       </header>
       <section>
         <h1>
-<a name="sessiontimeout" class="anchor" href="#sessiontimeout"><span class="octicon octicon-link"></span></a>sessionTimeout</h1>
+<a id="sessiontimeout" class="anchor" href="#sessiontimeout" aria-hidden="true"><span class="octicon octicon-link"></span></a>sessionTimeout</h1>
 
 <p><a href="https://travis-ci.org/travishorn/jquery-sessionTimeout"><img src="https://api.travis-ci.org/travishorn/jquery-sessionTimeout.png" alt="Build Status"></a></p>
 
 <h2>
-<a name="description" class="anchor" href="#description"><span class="octicon octicon-link"></span></a>Description</h2>
+<a id="description" class="anchor" href="#description" aria-hidden="true"><span class="octicon octicon-link"></span></a>Description</h2>
 
 <p>After a set amount of time, a dialog is shown to the user with the option to either log out now, or stay connected. If log out now is selected, the page is redirected to a logout URL. If stay connected is selected, a keep-alive URL is requested through AJAX. If no options is selected after another set amount of time, the page is automatically redirected to a timeout URL.</p>
 
 <h2>
-<a name="usage" class="anchor" href="#usage"><span class="octicon octicon-link"></span></a>Usage</h2>
+<a id="usage" class="anchor" href="#usage" aria-hidden="true"><span class="octicon octicon-link"></span></a>Usage</h2>
 
 <ol>
 <li>Include jQuery</li>
 <li>Include jQuery UI (for dialog)</li>
 <li>Include jquery.sessionTimeout.js</li>
 <li>Call <code>$.sessionTimeout();</code> after document ready</li>
-</ol><h2>
-<a name="options" class="anchor" href="#options"><span class="octicon octicon-link"></span></a>Options</h2>
+</ol>
+
+<h2>
+<a id="options" class="anchor" href="#options" aria-hidden="true"><span class="octicon octicon-link"></span></a>Options</h2>
 
 <p><strong>message</strong><br>
 Text shown to user in dialog after warning period.
@@ -56,6 +58,10 @@ Default: 'Your session is about to expire.'</p>
 <p><strong>keepAliveUrl</strong><br>
 URL to call through AJAX to keep session alive. This resource should do something innocuous that would keep the session alive, which will depend on your server-side platform.<br>
 Default: '/keep-alive'</p>
+
+<p><strong>keepAliveAjaxRequestType</strong><br>
+How should we make the call to the keep-alive url? (GET/POST/PUT)<br>
+Default: 'POST'</p>
 
 <p><strong>redirUrl</strong><br>
 URL to take browser to if no action is take after warning period.<br>
@@ -74,10 +80,10 @@ Time in milliseconds after page is opened until browser is redirected to redirUr
 Default: 1200000 (20 minutes)</p>
 
 <h2>
-<a name="links" class="anchor" href="#links"><span class="octicon octicon-link"></span></a>Links</h2>
+<a id="links" class="anchor" href="#links" aria-hidden="true"><span class="octicon octicon-link"></span></a>Links</h2>
 
 <ul>
-<li><a href="http://jsfiddle.net/xHEF9/515/">Online Demo</a></li>
+<li><a href="http://codepen.io/anon/pen/qEzNpd">Online Demo</a></li>
 <li><a href="https://sites.google.com/site/tpopsjqueryplugins/sessiontimeout/screenshots">Screenshots</a></li>
 </ul>
       </section>
