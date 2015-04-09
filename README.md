@@ -19,6 +19,10 @@ Default: 'Your session is about to expire.'
 URL to call through AJAX to keep session alive. This resource should do something innocuous that would keep the session alive, which will depend on your server-side platform.<br>
 Default: '/keep-alive'
 
+**keepAliveAjaxRequestType**<br>
+How should we make the call to the keep-alive url? (GET/POST/PUT)<br>
+Default: 'POST'
+
 **redirUrl**<br>
 URL to take browser to if no action is take after warning period.<br>
 Default: '/timed-out'
