@@ -36,5 +36,5 @@ Time in milliseconds after page is opened until browser is redirected to redirUr
 Default: 1200000 (20 minutes)
 
 ## Links
-* [Online Demo](http://jsfiddle.net/xHEF9/515/)
+* [Online Demo](http://codepen.io/anon/pen/qEzNpd)
 * [Screenshots](https://sites.google.com/site/tpopsjqueryplugins/sessiontimeout/screenshots)
