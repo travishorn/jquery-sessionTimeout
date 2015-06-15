@@ -39,6 +39,10 @@ Default: 900000 (15 minutes)
 Time in milliseconds after page is opened until browser is redirected to redirUrl.<br>
 Default: 1200000 (20 minutes)
 
+**appendTime**<br>
+If true, appends the current time stamp to the Keep Alive url to prevent caching issues
+Default: true
+
 ## Links
 * [Online Demo](http://codepen.io/anon/pen/qEzNpd)
 * [Screenshots](https://sites.google.com/site/tpopsjqueryplugins/sessiontimeout/screenshots)
