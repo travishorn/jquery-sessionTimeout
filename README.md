@@ -40,7 +40,7 @@ Time in milliseconds after page is opened until browser is redirected to redirUr
 Default: 1200000 (20 minutes)
 
 **appendTime**<br>
-If true, appends the current time stamp to the Keep Alive url to prevent caching issues
+If true, appends the current time stamp to the Keep Alive url to prevent caching issues<br>
 Default: true
 
 ## Links
