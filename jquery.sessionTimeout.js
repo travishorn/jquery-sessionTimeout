@@ -56,6 +56,9 @@
 (function ($) {
     jQuery.sessionTimeout = function (options) {
         var defaults = {
+            title: 'Session Timeout',
+            textBtnLogoutNow: 'Log Out Now',
+            textBtnStayConnected: 'Stay Connected',
             message: 'Your session is about to expire.',
             keepAliveUrl: '/keep-alive',
             keepAliveAjaxRequestType: 'POST',
@@ -68,38 +71,42 @@
 
         // Extend user-set options over defaults
         var o = defaults,
-				dialogTimer,
-				redirTimer;
+                dialogTimer,
+                redirTimer;
 
         if (options) { o = $.extend(defaults, options); }
 
         // Create timeout warning dialog
-        $('body').append('<div title="Session Timeout" id="sessionTimeout-dialog">' + o.message + '</div>');
+        $('body').append('<div title="' + o.title + '" id="sessionTimeout-dialog">' + o.message + '</div>');
         $('#sessionTimeout-dialog').dialog({
             autoOpen: false,
             width: 400,
             modal: true,
             closeOnEscape: false,
             open: function () { $(".ui-dialog-titlebar-close").hide(); },
-            buttons: {
-                // Button one - takes user to logout URL
-                "Log Out Now": function () {
-                    window.location = o.logoutUrl;
+            buttons: [
+                {
+                    text: o.textBtnLogoutNow,
+                    click: function () {
+                        window.location = o.logoutUrl;
+                    },
                 },
-                // Button two - closes dialog and makes call to keep-alive URL
-                "Stay Connected": function () {
-                    $(this).dialog('close');
+                {
+                    text: o.textBtnStayConnected,
+                    click: function () {
+                        $(this).dialog('close');
 
-                    $.ajax({
-                        type: o.keepAliveAjaxRequestType,
-                        url: o.appendTime ? updateQueryStringParameter(o.keepAliveUrl, "_", new Date().getTime()) : o.keepAliveUrl
-                    });
+                        $.ajax({
+                            type: o.keepAliveAjaxRequestType,
+                            url: o.appendTime ? updateQueryStringParameter(o.keepAliveUrl, "_", new Date().getTime()) : o.keepAliveUrl
+                        });
 
-                    // Stop redirect timer and restart warning timer
-                    controlRedirTimer('stop');
-                    controlDialogTimer('start');
+                        // Stop redirect timer and restart warning timer
+                        controlRedirTimer('stop');
+                        controlDialogTimer('start');
+                    },
                 }
-            }
+            ],
         });
 
         function controlDialogTimer(action) {
