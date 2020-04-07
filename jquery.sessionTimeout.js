@@ -86,12 +86,14 @@
             open: function () { $(".ui-dialog-titlebar-close").hide(); },
             buttons: [
                 {
+                    // Button one - takes user to logout URL
                     text: o.textBtnLogoutNow,
                     click: function () {
                         window.location = o.logoutUrl;
                     },
                 },
                 {
+                    // Button two - closes dialog and makes call to keep-alive URL
                     text: o.textBtnStayConnected,
                     click: function () {
                         $(this).dialog('close');
